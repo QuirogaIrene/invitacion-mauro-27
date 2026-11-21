@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06131b">
+  <title>¡Mauro cumple 27!</title>
+  <style>
+    :root { --cyan:#39f6f1; --blue:#637bff; --white:#fbffff; --dark:#06131b; }
+    * { box-sizing:border-box; }
+    body {
+      min-height:100vh; margin:0; padding:26px 16px; display:grid; place-items:center; overflow-x:hidden;
+      color:var(--white); font-family:Arial,Helvetica,sans-serif;
+      background-color:#071a24;
+      background-image:linear-gradient(180deg,rgba(0,9,15,.48),rgba(0,9,15,.62)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='84' viewBox='0 0 160 84'%3E%3Crect width='160' height='84' fill='%230b2635'/%3E%3Cpath d='M0 2H160 M0 42H160 M0 82H160 M2 2V42 M82 2V42 M42 42V82 M122 42V82' fill='none' stroke='%2302080d' stroke-width='4'/%3E%3C/svg%3E");
+      background-size:100% 100%,160px 84px;
+      background-repeat:no-repeat,repeat;
+    }
+    .poster { position:relative; width:min(100%,470px); padding:42px clamp(22px,7vw,48px) 34px; text-align:center; isolation:isolate; animation:poster-in 1s cubic-bezier(.2,.7,.2,1) both; }
+    .poster::before { content:""; position:absolute; inset:8px; z-index:-1; border:1px solid rgba(57,246,241,.11); background:radial-gradient(ellipse at 50% 25%,rgba(0,91,119,.19),transparent 56%); box-shadow:inset 0 0 70px rgba(0,0,0,.4); }
+    .intro { margin:0 auto 20px; max-width:360px; font-size:clamp(.95rem,4vw,1.2rem); line-height:1.3; font-weight:800; letter-spacing:.12em; text-shadow:0 0 8px #fff,0 0 20px rgba(57,246,241,.55); animation:fade-up .8s .25s both; }
+    .age { margin:-4px 0 -20px; font-size:clamp(8rem,36vw,13.4rem); line-height:.95; font-weight:300; letter-spacing:-.09em; color:transparent; -webkit-text-stroke:3px var(--cyan); text-shadow:0 0 5px #fff,0 0 13px var(--cyan),0 0 34px #00aaff; animation:neon 2.8s 1s ease-in-out infinite alternate,fade-up .8s .12s both; }
+    h1 { position:relative; width:max-content; max-width:100%; margin:0 auto 22px; color:#fff8ed; font-family:"Brush Script MT","Segoe Script",cursive; font-size:clamp(3.4rem,16vw,5.2rem); line-height:1; font-weight:500; font-style:italic; letter-spacing:0; text-shadow:0 0 2px #fff,0 0 5px rgba(255,244,222,.58); animation:fade-up .8s .38s both; }
+    h1::after { content:""; position:absolute; width:82%; height:1px; left:9%; bottom:-9px; background:linear-gradient(90deg,transparent,rgba(255,244,222,.8),transparent); box-shadow:0 0 4px rgba(255,244,222,.45); transform:scaleX(0); transform-origin:center; animation:draw .9s .9s forwards; }
+    .caption { margin:0 auto 22px; max-width:300px; font-size:clamp(.92rem,3.6vw,1.05rem); line-height:1.3; font-weight:800; letter-spacing:.08em; text-shadow:0 0 8px rgba(255,255,255,.9); animation:fade-up .8s .55s both; }
+    .date-frame { position:relative; display:flex; justify-content:center; align-items:center; gap:clamp(6px,2vw,12px); margin:0 auto 20px; padding:15px 8px; width:min(100%,390px); font-size:clamp(1.18rem,5.8vw,1.95rem); font-weight:800; letter-spacing:.01em; text-shadow:0 0 8px #fff,0 0 18px rgba(255,255,255,.65); animation:fade-up .8s .7s both; }
+    .date-frame::before,.date-frame::after { content:""; position:absolute; width:25px; height:25px; border-color:var(--blue); border-style:solid; filter:drop-shadow(0 0 5px var(--blue)); animation:frame-glow 2s ease-in-out infinite alternate; pointer-events:none; }
+    .date-frame::before { left:-5px; top:2px; border-width:2px 0 0 2px; }
+    .date-frame::after { right:-5px; bottom:2px; border-width:0 2px 2px 0; }
+    .star { color:var(--cyan); font-size:1.2rem; text-shadow:0 0 7px var(--cyan),0 0 16px var(--cyan); animation:twinkle 1.2s ease-in-out infinite alternate; }
+    .when { white-space:nowrap; }
+    .notes { margin:4px auto 0; max-width:310px; color:#d3e5e9; font-size:.83rem; line-height:1.7; letter-spacing:.03em; text-shadow:0 0 7px rgba(57,246,241,.5); animation:fade-up .8s .86s both; }
+    .notes strong { display:block; color:var(--cyan); font-size:.9rem; letter-spacing:.1em; }
+    .confetti { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:-1; }
+    .confetti i { position:absolute; top:-18px; left:var(--x); width:var(--w,5px); height:var(--h,12px); border-radius:var(--r,2px); background:var(--c,var(--cyan)); opacity:0; animation:fall var(--d,7s) var(--delay,0s) linear infinite; filter:drop-shadow(0 0 5px var(--c,var(--cyan))); }
+    .confetti i:nth-child(1){--x:5%;--delay:-1s;--c:var(--cyan)} .confetti i:nth-child(2){--x:12%;--delay:-5s;--c:#8294ff;--w:3px;--h:15px}
+    .confetti i:nth-child(3){--x:20%;--delay:-3s;--c:#fff;--w:6px;--h:6px;--r:50%;--d:9s} .confetti i:nth-child(4){--x:28%;--delay:-7s;--c:#9efaf6;--w:4px;--h:14px}
+    .confetti i:nth-child(5){--x:36%;--delay:-2s;--c:#819aff;--w:3px;--h:9px;--d:8s} .confetti i:nth-child(6){--x:44%;--delay:-6s;--c:#fff;--w:5px;--h:5px;--r:50%;--d:9s}
+    .confetti i:nth-child(7){--x:52%;--delay:-4s;--c:var(--cyan);--w:3px;--h:15px;--d:8s} .confetti i:nth-child(8){--x:60%;--delay:-8s;--c:#a6b1ff;--w:5px;--h:11px}
+    .confetti i:nth-child(9){--x:68%;--delay:-2.5s;--c:#fff;--w:6px;--h:6px;--r:50%;--d:9s} .confetti i:nth-child(10){--x:76%;--delay:-6s;--c:#9efaf6;--w:3px;--h:14px;--d:8s}
+    .confetti i:nth-child(11){--x:84%;--delay:-3s;--c:#819aff;--w:5px;--h:13px} .confetti i:nth-child(12){--x:92%;--delay:-7s;--c:#fff;--w:4px;--h:7px;--r:50%;--d:9s}
+    @keyframes poster-in { from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none} }
+    @keyframes fade-up { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none} }
+    @keyframes neon { from{filter:brightness(.85)}to{filter:brightness(1.3)} }
+    @keyframes frame-glow { from{filter:drop-shadow(0 0 3px var(--blue))}to{filter:drop-shadow(0 0 10px var(--cyan));border-color:var(--cyan)} }
+    @keyframes twinkle { to{transform:rotate(90deg) scale(1.25);filter:brightness(1.5)} }
+    @keyframes draw { to{transform:scaleX(1)} }
+    @keyframes fall { 10%{opacity:.8}100%{transform:translateY(110vh) rotate(600deg);opacity:0} }
+    @media(max-width:480px){body{background-size:100% 100%,120px 72px}}
+    @media(max-width:380px){.poster{padding-top:30px;padding-bottom:26px}.age{margin-bottom:-15px}.date-frame{margin-bottom:17px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <main class="poster" aria-label="Invitación al cumpleaños de Mauro">
+    <p class="intro">TE INVITO A FESTEJAR<br>MI CUMPLEAÑOS</p>
+    <div class="age" aria-label="27 años">27</div>
+    <h1>Mauro</h1>
+    <div class="date-frame" aria-label="Sábado 21 de noviembre">
+      <span class="when">21.11</span><span class="star" aria-hidden="true">☆</span><span class="when">23:30 HS</span>
+    </div>
+    <p class="notes"><strong>TRAÉ TU BEBIDA 🍻</strong>Dress code: casual<br>Sin ropa deportiva</p>
+  </main>
+</body>
+</html>
